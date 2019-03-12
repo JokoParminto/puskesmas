@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">dev_puskesmas</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="Detail_Periksa" view="colnames">
+<left>577</left>
+<top>70</top>
+<width>132</width>
+<height>126</height>
+<sql_create_table>CREATE TABLE `Detail_Periksa` (
+  `id_detail_periksa` int(11) NOT NULL AUTO_INCREMENT,
+  `id_periksa` int(11) DEFAULT NULL,
+  `id_resep` int(11) DEFAULT NULL,
+  `status_rujuk` enum('YA','TIDAK') DEFAULT NULL,
+  PRIMARY KEY (`id_detail_periksa`),
+  KEY `id_periksa` (`id_periksa`),
+  KEY `id_resep` (`id_resep`),
+  CONSTRAINT `Detail_Periksa_ibfk_1` FOREIGN KEY (`id_periksa`) REFERENCES `Periksa_Pasien` (`id_periksa`),
+  CONSTRAINT `Detail_Periksa_ibfk_2` FOREIGN KEY (`id_resep`) REFERENCES `Resep_Obat` (`id_resep`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="Obat" view="colnames">
+<left>44</left>
+<top>290</top>
+<width>120</width>
+<height>142</height>
+<sql_create_table>CREATE TABLE `Obat` (
+  `id_obat` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_obat` varchar(50) DEFAULT NULL,
+  `jenis_obat` varchar(20) DEFAULT NULL,
+  `merk_obat` varchar(20) DEFAULT NULL,
+  `tgl_kadaluarsa` date DEFAULT NULL,
+  PRIMARY KEY (`id_obat`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="Pasien" view="colnames">
+<left>51</left>
+<top>87</top>
+<width>114</width>
+<height>190</height>
+<sql_create_table>CREATE TABLE `Pasien` (
+  `id_pasien` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_pasien` varchar(50) DEFAULT NULL,
+  `alamat` text,
+  `jenis_kelamin` enum('l','p') DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `no_telepon` varchar(15) DEFAULT NULL,
+  `pekerjaan` varchar(15) DEFAULT NULL,
+  `alergi_obat` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id_pasien`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="Periksa_Pasien" view="colnames">
+<left>197</left>
+<top>418</top>
+<width>133</width>
+<height>142</height>
+<sql_create_table>CREATE TABLE `Periksa_Pasien` (
+  `id_periksa` int(11) NOT NULL AUTO_INCREMENT,
+  `id_obat` int(11) DEFAULT NULL,
+  `id_pasien` int(11) DEFAULT NULL,
+  `id_tenaga_medis` int(11) DEFAULT NULL,
+  `diagnosa` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_periksa`),
+  KEY `id_obat` (`id_obat`),
+  KEY `id_tenaga_medis` (`id_tenaga_medis`),
+  KEY `id_pasien` (`id_pasien`),
+  CONSTRAINT `Periksa_Pasien_ibfk_1` FOREIGN KEY (`id_obat`) REFERENCES `Obat` (`id_obat`),
+  CONSTRAINT `Periksa_Pasien_ibfk_2` FOREIGN KEY (`id_tenaga_medis`) REFERENCES `Tenaga_Medis` (`id_tenaga_medis`),
+  CONSTRAINT `Periksa_Pasien_ibfk_3` FOREIGN KEY (`id_pasien`) REFERENCES `Pasien` (`id_pasien`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="Rekam_Medis" view="colnames">
+<left>221</left>
+<top>55</top>
+<width>132</width>
+<height>142</height>
+<sql_create_table>CREATE TABLE `Rekam_Medis` (
+  `id_rekam_medis` int(11) NOT NULL AUTO_INCREMENT,
+  `id_detail_periksa` int(11) DEFAULT NULL,
+  `id_pasien` int(11) DEFAULT NULL,
+  `id_periksa` int(11) DEFAULT NULL,
+  `id_resep` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_rekam_medis`),
+  KEY `id_detail_periksa` (`id_detail_periksa`),
+  KEY `id_pasien` (`id_pasien`),
+  KEY `id_periksa` (`id_periksa`),
+  KEY `Rekam_Medis_ibfk_4` (`id_resep`),
+  CONSTRAINT `Rekam_Medis_ibfk_1` FOREIGN KEY (`id_detail_periksa`) REFERENCES `Detail_Periksa` (`id_detail_periksa`),
+  CONSTRAINT `Rekam_Medis_ibfk_2` FOREIGN KEY (`id_pasien`) REFERENCES `Pasien` (`id_pasien`),
+  CONSTRAINT `Rekam_Medis_ibfk_3` FOREIGN KEY (`id_periksa`) REFERENCES `Periksa_Pasien` (`id_periksa`),
+  CONSTRAINT `Rekam_Medis_ibfk_4` FOREIGN KEY (`id_resep`) REFERENCES `Resep_Obat` (`id_resep`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="Resep_Obat" view="colnames">
+<left>385</left>
+<top>222</top>
+<width>159</width>
+<height>142</height>
+<sql_create_table>CREATE TABLE `Resep_Obat` (
+  `id_resep` int(11) NOT NULL AUTO_INCREMENT,
+  `id_periksa` int(11) DEFAULT NULL,
+  `id_tenaga_medis` int(11) DEFAULT NULL,
+  `status_pengambilan` int(1) DEFAULT NULL,
+  `tanggal_pengambilan` date DEFAULT NULL,
+  PRIMARY KEY (`id_resep`),
+  KEY `id_periksa` (`id_periksa`),
+  KEY `id_tenaga_medis` (`id_tenaga_medis`),
+  CONSTRAINT `Resep_Obat_ibfk_1` FOREIGN KEY (`id_periksa`) REFERENCES `Periksa_Pasien` (`id_periksa`),
+  CONSTRAINT `Resep_Obat_ibfk_2` FOREIGN KEY (`id_tenaga_medis`) REFERENCES `Tenaga_Medis` (`id_tenaga_medis`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="Tenaga_Medis" view="colnames">
+<left>577</left>
+<top>365</top>
+<width>155</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `Tenaga_Medis` (
+  `id_tenaga_medis` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_tenaga_medis` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `jabatan` varchar(30) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `user_name` varchar(30) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `password` varchar(30) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `level` int(2) DEFAULT NULL,
+  PRIMARY KEY (`id_tenaga_medis`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
