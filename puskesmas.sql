@@ -123,7 +123,7 @@ CREATE TABLE `tenaga_medis` (
   `jabatan` varchar(30) CHARACTER SET utf8mb4 DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
   `jenis_kelamin` enum('l','p') DEFAULT 'l',
-  `agama` enum('islam','kristen','katolik','hindu','budha','lainnya') DEFAULT NULL,
+  `agama` enum('islam','protestan','katolik','hindu','budha','lainnya') DEFAULT NULL,
   `no_telepon` int(11) DEFAULT NULL,
   `user_name` varchar(30) CHARACTER SET utf8mb4 DEFAULT NULL,
   `pendidikan` varchar(20) DEFAULT NULL,

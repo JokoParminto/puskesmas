@@ -9,11 +9,11 @@
 			rekam_medis.*,
 			pasien.*,
 			tenaga_medis.nama_tenaga_medis,
-			Obat.*
+			obat.*
 		FROM rekam_medis  
 		JOIN pasien  ON pasien.id_pasien = rekam_medis.id_pasien
 		JOIN tenaga_medis ON tenaga_medis.id_tenaga_medis = rekam_medis.id_tenaga_medis
-		JOIN Obat ON Obat.id_obat = rekam_medis.id_obat
+		JOIN obat ON obat.id_obat = rekam_medis.id_obat
 		WHERE rekam_medis.id_rekam_medis = ".$id_rekam_medis."";
 	$dataPemeriksaan= mysqli_query($db, $query);
 	$isi=mysqli_fetch_assoc($dataPemeriksaan);

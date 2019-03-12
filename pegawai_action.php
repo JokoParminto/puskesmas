@@ -9,7 +9,6 @@
 	$no_telepon	= $_POST['no_telepon'];
 	$pendidikan	= $_POST['pendidikan'];
 	$level = $_POST['jabatan'];
-	// $id_poli					= $_POST['poli'];
 	
 	if ($_POST['jabatan'] == 1) {
 		$jabatan =  'Tenaga Medis';
@@ -55,7 +54,7 @@
 					'$username',
 					'$pendidikan',
 					'$password'
-					)";
+					)";	
 	} else if ($_POST['id_tenaga_medis'] !== ''  && $id_tenaga_medis_delete == '') {
 		$aksi = "Update";
 		$nama_tenaga_medis = $nama_tenaga_medis;
@@ -71,6 +70,7 @@
 					pendidikan='$pendidikan',
 					password='$password'
 				where id_tenaga_medis='$id_tenaga_medis'";
+	
 	}else{
 		$aksi = "Delete";
 		$nama_tenaga_medis			= $nama_tenaga_medis_delete;

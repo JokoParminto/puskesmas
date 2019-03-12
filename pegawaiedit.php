@@ -2,7 +2,7 @@
     include("header.php");
 
 	$id_tenaga_medis = isset($_GET['id_tenaga_medis']) ? $_GET['id_tenaga_medis'] : '';
-	$query="SELECT * FROM Tenaga_Medis WHERE id_tenaga_medis= '$id_tenaga_medis'";
+	$query="SELECT * FROM tenaga_medis WHERE id_tenaga_medis= '$id_tenaga_medis'";
 	$hasil= mysqli_query($db, $query);
 	$isi = mysqli_fetch_assoc($hasil);
 ?>

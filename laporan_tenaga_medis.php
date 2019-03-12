@@ -99,7 +99,7 @@
 									<?php
 										$query="
 											SELECT * 
-											from Tenaga_Medis
+											from tenaga_medis
 											ORDER BY id_tenaga_medis ASC
 										";
 										$datapasien= mysqli_query($db, $query);
@@ -170,12 +170,12 @@
 												SELECT 
 													rekam_medis.*,
 													pasien.*,
-													Tenaga_Medis.*,
+													tenaga_medis.*,
 													obat.*,
 													resep_obat.*
 												FROM rekam_medis  
 												JOIN pasien  ON pasien.id_pasien = rekam_medis.id_pasien
-												JOIN Tenaga_Medis ON Tenaga_Medis.id_tenaga_medis = rekam_medis.id_tenaga_medis
+												JOIN tenaga_medis ON tenaga_medis.id_tenaga_medis = rekam_medis.id_tenaga_medis
 												JOIN obat ON obat.id_obat = rekam_medis.id_obat
 												LEFT JOIN resep_obat ON resep_obat.id_rekam_medis = rekam_medis.id_rekam_medis
 												GROUP BY rekam_medis.tgl_rekam_medis DESC
@@ -228,10 +228,10 @@
 												SELECT 
 												rekam_medis.*,
 												pasien.*,
-												Tenaga_Medis.*
+												tenaga_medis.*
 											FROM  rekam_medis
 											JOIN pasien ON pasien.id_pasien = rekam_medis.id_pasien
-											JOIN Tenaga_Medis ON Tenaga_Medis.id_tenaga_medis = rekam_medis.id_tenaga_medis
+											JOIN tenaga_medis ON tenaga_medis.id_tenaga_medis = rekam_medis.id_tenaga_medis
 											WHERE MONTH(rekam_medis.tgl_rekam_medis) = '$parsing'
 											AND rekam_medis.status_rawat = 'rawat-jalan'
 											GROUP BY rekam_medis.id_pasien 
@@ -280,9 +280,9 @@
 										$parsing = substr($startdate, 5,2);
 										$query="
 											SELECT *
-											FROM  Tenaga_Medis
+											FROM  tenaga_medis
 											JOIN pasien ON pasien.id_pasien = rekam_medis.id_pasien
-											JOIN Tenaga_Medis ON Tenaga_Medis.id_tenaga_medis = rekam_medis.id_tenaga_medis
+											JOIN tenaga_medis ON tenaga_medis.id_tenaga_medis = rekam_medis.id_tenaga_medis
 											WHERE MONTH(rekam_medis.tgl_rekam_medis) = '$parsing'
 											AND rekam_medis.status_rawat = 'rawat-inap'
 											GROUP BY rekam_medis.id_pasien 
@@ -505,12 +505,12 @@
 												SELECT 
 													rekam_medis.*,
 													pasien.*,
-													Tenaga_Medis.*,
+													tenaga_medis.*,
 													obat.*,
 													resep_obat.*
 												FROM rekam_medis  
 												JOIN pasien  ON pasien.id_pasien = rekam_medis.id_pasien
-												JOIN Tenaga_Medis ON Tenaga_Medis.id_tenaga_medis = rekam_medis.id_tenaga_medis
+												JOIN tenaga_medis ON tenaga_medis.id_tenaga_medis = rekam_medis.id_tenaga_medis
 												JOIN obat ON obat.id_obat = rekam_medis.id_obat
 												LEFT JOIN resep_obat ON resep_obat.id_rekam_medis = rekam_medis.id_rekam_medis
 												WHERE rekam_medis.id_pasien = '$id_pasien'

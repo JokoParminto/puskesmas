@@ -39,7 +39,7 @@
 													<select class="form-control" name="id_pasien" required="" id="id_pasien">
 														<option value="">Pilih Pasien</option>
 															<?php
-																$query = ("select * from Pasien");
+																$query = ("select * from pasien");
 																$connect = mysqli_query($db, $query);
 																while ($data = mysqli_fetch_assoc($connect)){
 																echo "<option value='{$data['id_pasien']}'>{$data['nama_pasien']}</option>";}?>
@@ -50,7 +50,7 @@
 													<select class="form-control" name="id_tenaga_medis" required="" id="id_tenaga_medis">
 														<option value="">Tenaga Medis</option>
 															<?php
-																	$query = ("select * from Tenaga_Medis WHERE jabatan = 'Tenaga Medis'");
+																	$query = ("select * from tenaga_medis WHERE jabatan = 'Tenaga Medis'");
 																	$connect = mysqli_query($db, $query);
 																	while ($data = mysqli_fetch_assoc($connect)){
 																	echo "<option value='{$data['id_tenaga_medis']}'>{$data['nama_tenaga_medis']}</option>";}?>
@@ -111,7 +111,7 @@
 																		<select class="form-control id_obat" name="id_obat[]" required="" id="id_obat">
 																			<option value="">Pilih Obat</option>
 																			<?php
-																				$query = ("select * from Obat");
+																				$query = ("select * from obat");
 																				$connect = mysqli_query($db, $query);
 																				while ($data = mysqli_fetch_assoc($connect)){
 																				echo "<option value='{$data['id_obat']}'>{$data['nama_obat']}</option>";}?>

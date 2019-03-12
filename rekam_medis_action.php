@@ -28,6 +28,14 @@
 		$today = date('Y-m-d');
 	}
 
+	$todayResep = '';
+	$tgl_rekam_medis = date('Y-m-d');
+	if ($status_rujuk == 'YA') {
+		$todayResep = '0000-00-00';
+	} else {
+		$todayResep = date('Y-m-d');
+	}
+
 	foreach ($id_obat as $key => $value) {
 		if ($id_obat[$key] !== '') {
 			$sql = "INSERT INTO rekam_medis
@@ -54,7 +62,6 @@
 				'$tindakan',
 				'$tgl_rekam_medis'
 				)";
-			// print_r($sql);exit();
 			$pemeriksaan = mysqli_query($db, $sql);
 			$latest_id_pemeriksaan = $db->insert_id;
 			$status_pengambilan = 0;
@@ -65,23 +72,22 @@
 				$status_pengambilan = 1;
 			}
 			if ($latest_id_pemeriksaan) {
-				$sql = "INSERT INTO resep_obat 
-					(
-						id_rekam_medis,
-						id_obat,
-						jml_obat,
-						status_pengambilan,
-						tanggal_pengambilan,
-						catatan
-					) VALUES (
-						$latest_id_pemeriksaan,
-						$id_obat[$key],
-						$jumlah_obat[$key],
-						$status_pengambilan,
-						'$today',
-						'$catatan'
-					)";	
-				// print_r($sql);exit();
+			$sql = "INSERT INTO resep_obat 
+				(
+					id_rekam_medis,
+					id_obat,
+					jml_obat,
+					status_pengambilan,
+					tanggal_pengambilan,
+					catatan
+				) VALUES (
+					$latest_id_pemeriksaan,
+					$id_obat[$key],
+					$jumlah_obat[$key],
+					$status_pengambilan,
+					'$todayResep',
+					'$catatan'
+				)"; 
 				$resep = mysqli_query($db, $sql);
 				$latest_id_resep = $db->insert_id;   
 			}  

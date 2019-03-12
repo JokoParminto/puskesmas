@@ -58,8 +58,8 @@
 					'$penyakit_riwayat_keluarga'
 					)";
 	} else if ($_POST['id_pasien'] !== '' && $id_pasien_delete == '') {
-		$aksi				= "Update";
-		$nama_pasien		= $nama_pasien;
+		$aksi = "Update";
+		$nama_pasien = $nama_pasien;
 		$sql = "UPDATE pasien SET 
 					nama_pasien='$nama_pasien',
 					alamat='$alamat',
@@ -76,8 +76,8 @@
 					penyakit_riwayat_keluarga='$penyakit_riwayat_keluarga'
 				where id_pasien='$id_pasien'";
 	} else {
-		$aksi				= "Delete";
-		$nama_pasien		= $nama_pasien_delete;
+		$aksi = "Delete";
+		$nama_pasien = $nama_pasien_delete;
 		$sql = "DELETE FROM pasien where id_pasien = '$id_pasien_delete'";
 	}
 	

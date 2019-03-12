@@ -2,7 +2,7 @@
 	include("header.php");
 
 	$id_obat        = isset($_GET['id_obat']) ? $_GET['id_obat'] : '';
-    $query="SELECT * FROM Obat WHERE id_obat= '$id_obat'";
+    $query="SELECT * FROM obat WHERE id_obat= '$id_obat'";
     $hasil= mysqli_query($db, $query);
     $isi = mysqli_fetch_assoc($hasil);
 ?>
