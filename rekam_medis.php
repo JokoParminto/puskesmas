@@ -100,6 +100,7 @@
 															<tr>
 																<th>#</th>
 																<th>Nama Obat</th>
+																<th style="width:15%">Satuan</th>
 																<th style="width:15%">Banyak</th>
 																<th style="width:15%">Aksi</th>
 															</tr>
@@ -114,8 +115,11 @@
 																				$query = ("select * from obat");
 																				$connect = mysqli_query($db, $query);
 																				while ($data = mysqli_fetch_assoc($connect)){
-																				echo "<option value='{$data['id_obat']}'>{$data['nama_obat']}</option>";}?>
+																				echo "<option value='{$data['id_obat']}' data-satuan = '{$data['satuan_obat']}'>{$data['nama_obat']}</option>";}?>
 																		</select>
+																	</td>
+																	<td>
+																		<input type="text" class="form-control satuanobatval" readonly>
 																	</td>
 																	<td>
 																		<input type="number" class="form-control jumlah_obat" value="1" min="1" id="jumlah_obat" name="jumlah_obat[]">
@@ -224,6 +228,12 @@
         e.preventDefault();
         $(this).parent().parent().remove();
 		nomor -= 1;
+    })
+
+    $(document).on("click", ".id_obat", function(e) { //user click on remove text
+        e.preventDefault();
+        var satuan = $(this).find(":selected").attr('data-satuan');
+        $(this).parent().parent().find('.satuanobatval').val(satuan)
     })
 
 </script>
